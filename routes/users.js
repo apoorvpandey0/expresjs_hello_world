@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+// If we want to use a middle ware with a specific router we can use:
+// router.use(logger)
+
 router.get('/', (req, res) => {
     res.send('Users list')
 })

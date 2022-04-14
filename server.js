@@ -9,6 +9,25 @@ const app = express();
 // Setting templating engine for app
 app.set("view engine", "ejs");
 
+
+/* 
+Registering our middleware logger
+Registering this later(After '/' GET) will not work so register here!
+This will add the logger middleware to each and every endpoint that we create in this app
+*/
+app.use(logger)
+
+/*
+If we want to use a middle ware with a specific endpoint then use it like this
+We can pass as many middlewares as we wish like this ,m2,m3 ...
+app.get("/", logger, (req, res) => {
+    res.render("index", {
+        text: "Welcome to my website"
+    });
+})
+
+*/
+
 app.get("/", (req, res) => {
     console.log("iNSIDE GET REQUEST");
 
@@ -26,8 +45,16 @@ app.get("/", (req, res) => {
     res.render("index", { 'text': 'World' });
 })
 
+
+// Registering router
 const userRouter = require('./routes/users')
 app.use('/users', userRouter)
 
+// This function is a middleware and will run before every request processed
+function logger(req, res, next) {
+    // This will simply print the request path in the console.
+    console.log(`${req.method} ${req.path}`);
+    next();
+}
 
 app.listen(3000)
