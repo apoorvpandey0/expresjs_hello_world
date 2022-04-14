@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express JS</title>
+</head>
+<body>
+    <!-- We could have used text directly like <%= text %> , but in case if we forgot to 
+    pass text as a key in render function this will result in error on page.
+    to avoid that we use locals.text since locals will ALWAYS be defined and text 
+    if not passed will be undefined and not throw an error. -->
+
+    <!-- TODO: locals does not works idk why -->
+    <h1>Hello <%= locals.text || 'Default' %></h1>
+    
+</body>
+</html>
