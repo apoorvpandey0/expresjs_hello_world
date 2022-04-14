@@ -1,5 +1,8 @@
 console.log("Hello from server.js!");
+
 const express = require("express");
+
+
 const app = express();
 
 // Like Django templating engine we have ejs here
@@ -22,6 +25,9 @@ app.get("/", (req, res) => {
 
     res.render("index", { 'text': 'World' });
 })
+
+const userRouter = require('./routes/users')
+app.use('/users', userRouter)
 
 
 app.listen(3000)
