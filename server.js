@@ -9,6 +9,10 @@ const app = express();
 // Like HTML,CSS etc
 app.use(express.static('public'))
 
+// By default express does not allows us to access form data
+// we need to enable this middleware to access the data in our fns
+app.use(express.urlencoded({ extended: true }));
+
 // Like Django templating engine we have ejs here
 // Setting templating engine for app
 app.set("view engine", "ejs");

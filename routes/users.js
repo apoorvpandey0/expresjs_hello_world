@@ -5,11 +5,31 @@ const router = express.Router();
 // router.use(logger)
 
 router.get('/', (req, res) => {
-    res.send('Users list')
+
+    // How to access query parameters in express
+    console.log(req.query.search);
+
+    res.send(users)
 })
 
 router.post('/create', (req, res) => {
+    // By default express does not allows us to access form data
+    // we need to enable urlencoded middleware to access the data in our fns
+
+    const isValid = true;
+
+    if (isValid) {
+        users.push(req.body)
+        res.redirect('/users')
+    } else {
+        res.status(400).send("Invalid data")
+    }
+    console.log(req.body);
     res.send('User created')
+})
+
+router.get('/new', (req, res) => {
+    res.render('users/new', { 'fname': 'Apoorv', 'lname': 'Pandey' })
 })
 
 // Method 1 for chaining HTTP methods in a single route
@@ -43,7 +63,7 @@ router.delete('/:id', (req, res) => {
 
 */
 
-const users = [{ name: 'Peter', age: 31 }, { name: 'John', age: 32 }]
+const users = [{ fname: 'Peter', lname: 'Gryffin' }, { fname: 'Stweie', lname: 'Gryffin' }]
 
 // this works as kind of a middle ware between request and router function
 router.param('id', (req, res, next, id) => {
