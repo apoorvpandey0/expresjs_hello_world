@@ -2,8 +2,12 @@ console.log("Hello from server.js!");
 
 const express = require("express");
 
-
 const app = express();
+
+
+// Initializing static files and folders
+// Like HTML,CSS etc
+app.use(express.static('public'))
 
 // Like Django templating engine we have ejs here
 // Setting templating engine for app
